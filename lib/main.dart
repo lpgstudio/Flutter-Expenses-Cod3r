@@ -55,18 +55,37 @@ class MyHomePage extends StatelessWidget {
           'Expenses',
         ),
       ),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 120,
             child: Card(
               child: Text('Grafico'),
             ),
           ),
-          Card(
-            child: Text('Lista de transações'),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _transaction.map((tr) {
+              return Card(
+                child: Row(
+                  children: [
+                    // Preço
+                    Container(
+                      child: Text(tr.value.toString()),
+                    ),
+                    // Produto
+                    Column(
+                      children: [
+                        Text(tr.title),
+                        Text(tr.date.toString()),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
